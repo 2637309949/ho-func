@@ -9,15 +9,18 @@
  */
 const array = require('./array');
 
-const tree = require('./array');
+const tree = require('./tree');
 
 const memoize = require('./memoize');
 
-const Lock = require('./Lock');
+const lock = require('./lock');
+
+const object = require('./object');
 
 module.exports = {
   tree,
-  Lock,
+  lock,
   array,
+  object,
   memoize
 };

@@ -147,6 +147,43 @@ Output:
 ]
 ```
 
+### Object
+ - compare  - Compare document differences
+```javascript
+compare({
+  target: {
+    a: 12,
+    b: 3,
+    d: {
+      a: 12,
+      b: 23,
+      c: [1, 2]
+    },
+    c: [{ a: 23 }, { b: 4 }]
+  },
+  source: {
+    a: 12,
+    b: 34,
+    d: {
+      a: 23,
+      b: 23,
+      c: [3, 2]
+    },
+    c: [{ f: 23 }]
+  }
+})
+```
+Output:
+```javascript
+[
+  { path: 'b', target: 3, source: 34 },
+  { path: 'd.a', target: 12, source: 23 },
+  { path: 'd.c.[0]', target: 1, source: 3 },
+  { path: 'c.[0].a', target: 23, source: undefined },
+  { path: 'c.[1]', target: { b: 4 }, source: undefined }
+]
+```
+
 ### Memo
  - memoize  - Cache the results
 ```javascript

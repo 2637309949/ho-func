@@ -8,7 +8,16 @@ const hash = require('object-hash');
 
 const moment = require('moment');
 
-const Lock = require('./Lock');
+const Lock = require('./lock');
+/**
+ * memoize
+ *
+ * @param {Function} func
+ * @param {Object} option
+ *
+ * @api public
+ */
+
 
 module.exports = function (func) {
   let option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
