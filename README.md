@@ -147,6 +147,23 @@ Output:
 ]
 ```
 
+### Memo
+ - memoize  - Cache the results
+```javascript
+const func = memoize(function (x) {
+  console.log('chache = ', x)
+  return x
+}, { consis: x => x, timeBrake: 5000 })
+func(12)
+func(12)
+```
+Output:
+```javascript
+chache =  12
+```
+ - Lock  - synchrolock
+
+
 The MIT License (MIT)
 
 Copyright (c) 2018-2020 Double
@@ -168,4 +185,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
