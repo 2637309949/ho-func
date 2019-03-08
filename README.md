@@ -1,7 +1,7 @@
 # ho-func
 Advanced function set
 
-### Array
+### Array Tools
  - dupIndex  - Find duplicate indexes
 
 ```javascript
@@ -17,7 +17,7 @@ Output:
   '88': [ 11, 12 ]
 }
 ```
-### Tree
+### Tree Tools
  - totalizer  - Cumulative sum procedure
 ```javascript
 totalizer(({
@@ -147,7 +147,7 @@ Output:
 ]
 ```
 
-### Object
+### Object Tools
  - compare  - Compare document differences
 ```javascript
 compare({
@@ -184,7 +184,7 @@ Output:
 ]
 ```
 
-### Memo
+### Memo Tools
  - memoize  - Cache the results
 ```javascript
 const func = memoize(function (x) {
