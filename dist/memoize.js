@@ -21,7 +21,7 @@ const Lock = require('./lock');
 
 module.exports = function (func) {
   let option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
-    consis: x => x,
+    iden: x => x,
     timeBrake: 10000
   };
   const lock = new Lock();
@@ -31,7 +31,7 @@ module.exports = function (func) {
     function () {
       var _ref = _asyncToGenerator(function* (parameter) {
         const argsArray = Array.from(arguments);
-        const consArgs = option.consis(argsArray);
+        const consArgs = option.iden(argsArray);
         const hashCode = hash(consArgs);
         yield lock.obtainLock();
         const target = ret.find(x => x.hash === hashCode);
