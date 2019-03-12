@@ -171,6 +171,148 @@ searchNodeParents({
 // ]
 ```
 
+#### listTransfer({ list, transfer, accumulate, option })  - tree assignment up or down
+- **list** An array list to assignment.
+- **transfer** An function to transfer.
+- **accumulate** For `direct: 'up'`, a function that accumulate childrens.
+- **option** 
+  - **childrenField** The default children attribute. (default: `'children'`)
+  - **parentFeild** The default parent attribute. (default: `'parent'`)
+  - **idFeild** The default id attribute. (default: `'id'`)
+  - **default** The default Object to assignment. (default: `{}`)
+  - **direct** The direction of the assignment. (default: `'down'`)
+```javascript
+// direct: 'down',
+listTransfer({
+  list: [
+    { id: '1', parent: '123', permits: 'super' },
+    { id: '2', parent: '' },
+    { id: '3', parent: '122' },
+    { id: '11', parent: '1', permits: 'user' },
+    { id: '12', parent: '1' },
+    { id: '12', parent: '11' }
+  ],
+  transfer (item, pre) {
+    const permits = pre.permits === 'super' ? pre.permits : (item.permits || pre.permits)
+    return {
+      permits
+    }
+  },
+  option: {
+    default: { permits: '' }
+  }
+})
+//=> [
+//   { id: '1', parent: '123', permits: 'super' },
+//   { id: '2', parent: '', permits: '' },
+//   { id: '3', parent: '122', permits: '' },
+//   { id: '11', parent: '1', permits: 'super' },
+//   { id: '12', parent: '1', permits: 'super' },
+//   { id: '12', parent: '11', permits: 'super' }
+// ]
+
+// direct: 'up',
+listTransfer({
+  list: [
+    { id: '1', parent: '123', permits: ['super'] },
+    { id: '2', parent: '' },
+    { id: '3', parent: '122' },
+    { id: '11', parent: '1' },
+    { id: '12', parent: '1' },
+    { id: '13', parent: '11', permits: ['user'] }
+  ],
+  transfer (item, pre) {
+    const permits = (item.permits && item.permits.length > 0 ? item.permits : pre.permits)
+    return {
+      permits
+    }
+  },
+  accumulate (acc, curr, item) {
+    acc = acc || { permits: [] }
+    acc.permits = [...curr.permits, ...acc.permits]
+    acc.permits = acc.permits.concat(item.permits || [])
+    acc.permits = Array.from(new Set(acc.permits))
+    return acc
+  },
+  option: {
+    direct: 'up',
+    default: { permits: [] }
+  }
+})
+//=> [ { id: '1', parent: '123', permits: [ 'user', 'super' ] },
+//   { id: '2', parent: '', permits: [] },
+//   { id: '3', parent: '122', permits: [] },
+//   { id: '11', parent: '1', permits: [ 'user' ] },
+//   { id: '12', parent: '1', permits: [] },
+//   { id: '13', parent: '11', permits: [ 'user' ] } ]
+```
+
+#### treeTransfer({ tree, transfer, accumulate, option })  - tree assignment up or down
+- **tree** An array tree to assignment.
+- **transfer** An function to transfer.
+- **accumulate** For `direct: 'up'`, a function that accumulate childrens.
+- **option** 
+  - **childrenField** The default children attribute. (default: `'children'`)
+  - **parentFeild** The default parent attribute. (default: `'parent'`)
+  - **idFeild** The default id attribute. (default: `'id'`)
+  - **default** The default Object to assignment. (default: `{}`)
+  - **direct** The direction of the assignment. (default: `'down'`)
+```javascript
+// direct: 'down',
+treeTransfer({
+  tree: [{
+    data: 12,
+    children: [{
+      data: 12,
+      permits: 'super',
+      children: [{ data: 23 }]
+    }, {
+      data: 12
+    }]
+  }],
+  transfer (item, pre) {
+    const permits = pre.permits === 'super' ? pre.permits : (item.permits || pre.permits)
+    return {
+      permits
+    }
+  },
+  option: {
+    default: { permits: 'user' }
+  }
+})
+//=> [
+//     {
+//         "data": 12,
+//         "id": "0hRymSdeYt6LeuSIKfPnMG4hJkiXlBmY",
+//         "permits": "user",
+//         "children": [
+//             {
+//                 "data": 12,
+//                 "permits": "super",
+//                 "parent": "0hRymSdeYt6LeuSIKfPnMG4hJkiXlBmY",
+//                 "id": "mkKYb1Eak7EgZCuW0t4dkFUvrbyq6DJ8",
+//                 "children": [
+//                     {
+//                         "data": 23,
+//                         "parent": "mkKYb1Eak7EgZCuW0t4dkFUvrbyq6DJ8",
+//                         "id": "Bod1IgeTBSU8PgTtoxgZqTncNwTGzHD0",
+//                         "permits": "super",
+//                         "children": []
+//                     }
+//                 ]
+//             },
+//             {
+//                 "data": 12,
+//                 "parent": "0hRymSdeYt6LeuSIKfPnMG4hJkiXlBmY",
+//                 "id": "OjA9QiYoMTP8GYNUUCaLFRvWsBWeb7aB",
+//                 "permits": "user",
+//                 "children": []
+//             }
+//         ]
+//     }
+// ]
+```
+
 ### Object Tools
 #### compare({ target, source, diffBack, option })  - Compare document differences
 - **target** An Object target to compare.
