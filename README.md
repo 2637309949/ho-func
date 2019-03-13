@@ -369,6 +369,24 @@ func(12)
 ```
 #### Lock  - synchrolock
 
+### File Tools
+#### httpZipFiles  - Http download files and zip
+- **list** An array uri to download. `{ name, uri }` or `'http://'`
+- **zipPath** Zip path to save.
+```javascript
+httpZipFiles(['https://assets-cdn.github.com/images/modules/logos_page/Octocat.png']).then(x => {
+  console.log(x)
+})
+```
+#### localZipFiles  - localfile read and zip
+- **list** An array uri to download. `{ name, path }` or `'//xx//xx'`
+- **zipPath** Zip path to save.
+```javascript
+localZipFiles(['D:\\K11\\repo\\xx-snap\\package.json']).then(x => {
+  console.log(x)
+})
+```
+
 The MIT License (MIT)
 
 Copyright (c) 2018-2020 Double

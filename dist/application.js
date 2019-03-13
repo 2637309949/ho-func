@@ -17,7 +17,10 @@ const lock = require('./lock');
 
 const object = require('./object');
 
+const file = require('./file');
+
 module.exports = {
+  file,
   tree,
   lock,
   array,
