@@ -4,7 +4,7 @@
 ## Installation
 
 ```
-npm install ho-func --save
+npm install juglans-utils --save
 ```
 
 ## Usage
