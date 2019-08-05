@@ -6,13 +6,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-/**
- * @author [Double]
- * @email [2637309949@qq.com]
- * @create date 2019-03-07 10:05:31
- * @modify date 2019-03-07 10:05:31
- * @desc [description]
- */
+// Copyright (c) 2018-2020 Double.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 function makeid(num) {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let text = '';
